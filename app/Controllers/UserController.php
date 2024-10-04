@@ -42,14 +42,14 @@ class UserController extends BaseController
         $data = $this->request->getPost(['name', 'surname', 'age', 'email', 'phone']);
         $model->update($id, $data);
         
-        return redirect()->to('/users');
+        return redirect()->to('/');
     }
 
     public function delete($id)
     {
         $model = new UserModel();
         $model->delete($id);
-        
+
         return redirect()->to('/');    
     }
 }
