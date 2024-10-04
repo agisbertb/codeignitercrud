@@ -44,4 +44,12 @@ class UserController extends BaseController
         
         return redirect()->to('/users');
     }
+
+    public function delete($id)
+    {
+        $model = new UserModel();
+        $model->delete($id);
+        
+        return redirect()->to('/');    
+    }
 }

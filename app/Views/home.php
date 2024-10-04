@@ -20,6 +20,7 @@
             <td><?= $user['phone'] ?></td>
             <td>
                 <a href="/edit/<?= $user['id'] ?>">Edit</a>
+                <a href="/delete/<?= $user['id'] ?>">Delete</a>
             </td>
         </tr>
     <?php endforeach; ?>
