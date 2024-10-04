@@ -8,6 +8,7 @@
         <th>Age</th>
         <th>Email</th>
         <th>Phone</th>
+        <th>Actions</th>
     </tr>
     <?php foreach ($users as $user): ?>
         <tr>
@@ -17,6 +18,9 @@
             <td><?= $user['age'] ?></td>
             <td><?= $user['email'] ?></td>
             <td><?= $user['phone'] ?></td>
+            <td>
+                <a href="/edit/<?= $user['id'] ?>">Edit</a>
+            </td>
         </tr>
     <?php endforeach; ?>
 </table>
