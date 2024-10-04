@@ -8,9 +8,10 @@ class UserController extends BaseController
 {
     public function index()
     {
-        #$model = new UserModel();
-        #$data['users'] = $model->findAll();
-        return view('home');
+        $model = new UserModel();
+        $data['users'] = $model->findAll();
+        
+        return view('home', $data);
     }
 
     public function create()
@@ -18,4 +19,12 @@ class UserController extends BaseController
         return view('create_user');
     }
 
+    public function store()
+    {
+        $model = new UserModel();
+        $data  = $this->request->getPost(['name', 'surname', 'age', 'email', 'phone']);
+        $model->insert($data);
+
+        return redirect()->to('/');
+    }
 }
