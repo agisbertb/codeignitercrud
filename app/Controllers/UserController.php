@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\UserModel;
+use Config\Services;
 
 class UserController extends BaseController
 {
@@ -21,11 +22,25 @@ class UserController extends BaseController
 
     public function store()
     {
+        $validation = Services::validation();
+
+        $validation->setRules([
+            'name' => 'required|min_length[3]|max_length[255]',
+            'surname' => 'required|min_length[3]|max_length[255]',
+            'age' => 'required|integer|greater_than[0]|less_than[100]',
+            'email' => 'required|valid_email|is_unique[users.email]',
+            'phone' => 'required|min_length[9]|max_length[15]'
+        ]);
+
+        if (!$validation->withRequest($this->request)->run()) {
+            return redirect()->back()->withInput()->with('errors', $validation->getErrors());
+        }
+
         $model = new UserModel();
         $data  = $this->request->getPost(['name', 'surname', 'age', 'email', 'phone']);
         $model->insert($data);
 
-        return redirect()->to('/');
+        return redirect()->to('/')->with('success', 'User created successfully');
     }
 
     public function edit($id)
@@ -33,16 +48,34 @@ class UserController extends BaseController
         $model = new UserModel();
         $data['user'] = $model->find($id);
 
+        if (empty($data['user'])) {
+            return redirect()->to('/')->with('error', 'User not found');
+        }
+
         return view('edit_user', $data);
     }
 
     public function update($id)
     {
+        $validation = Services::validation();
+
+        $validation->setRules([
+            'name' => 'required|min_length[3]|max_length[255]',
+            'surname' => 'required|min_length[3]|max_length[255]',
+            'age' => 'required|integer|greater_than[0]',
+            'email' => 'required|valid_email',
+            'phone' => 'required|min_length[9]|max_length[15]'
+        ]);
+
+        if (!$validation->withRequest($this->request)->run()) {
+            return redirect()->back()->withInput()->with('errors', $validation->getErrors());
+        }
+
         $model = new UserModel();
         $data = $this->request->getPost(['name', 'surname', 'age', 'email', 'phone']);
         $model->update($id, $data);
         
-        return redirect()->to('/');
+        return redirect()->to('/')->with('success', 'User updated successfully');
     }
 
     public function delete($id)
@@ -50,6 +83,10 @@ class UserController extends BaseController
         $model = new UserModel();
         $model->delete($id);
 
-        return redirect()->to('/');    
+        if (empty($user)) {
+            return redirect()->to('/')->with('error', 'User not found');
+        }
+
+        return redirect()->to('/')->with('success', 'User deleted successfully');  
     }
 }
