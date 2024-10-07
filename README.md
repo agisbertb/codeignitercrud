@@ -1,68 +1,90 @@
-# CodeIgniter 4 Application Starter
+# CodeIgniter 4 User CRUD Application
 
-## What is CodeIgniter?
+## Overview
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+This is a simple User CRUD application built with [CodeIgniter 4](https://codeigniter.com). The application allows you to perform Create, Read, Update, and Delete operations on user records.
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+## Features
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+- User creation with fields: Name, Surname, Age, Email, and Phone.
+- View a list of users.
+- Edit user details.
+- Delete users.
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+![User CRUD Application](/image.png)
 
-## Installation & updates
+## Installation
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+To set up the project, follow these steps:
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+1. **Clone the repository:**
 
-## Setup
+    ```bash
+    git clone git@github.com:agisbertb/codeignitercrud.git
+    cd your-repo-folder
+    ```
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+2. **Install dependencies:**
 
-## Important Change with index.php
+    Make sure you have Composer installed, then run:
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+    ```bash
+    composer install
+    ```
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+3. **Set up your environment:**
 
-**Please** read the user guide for a better explanation of how CI4 works!
+    Copy the .env.example file to .env and configure the necessary settings:
+
+    ```bash
+    cp .env.example .env
+    ```
+
+    Update the following fields in your .env file:
+
+    ```bash
+    app.baseURL = 'http://localhost/your-app-folder'
+    database.default.hostname = 'localhost'
+    database.default.database = 'your_database_name'
+    database.default.username = 'your_database_username'
+    database.default.password = 'your_database_password'
+    ```
+
+## Database Migration
+
+To create the users table, run the following command:
+    
+```bash
+php spark migrate
+```
+
+This will execute the migration file to create the necessary database table.
+
+## Database Seeding
+
+To populate the users table with initial data, run:
+
+```bash
+php spark db:seed UserSeeder
+```
+
+This will insert sample user data into the database.
+
+## Running the Application
+
+Make sure your web server points to the public directory of your CodeIgniter application. You can use PHP's built-in server for testing:
+
+```bash
+php spark serve
+```
+
+Now, visit http://localhost:8080 in your web browser to access the application.
+
+## Requirements
+
+- Make sure your server meets the requirements for PHP 8.1 or higher.
+- Ensure the required PHP extensions are installed and enabled, including intl and mbstring.
 
 ## Repository Management
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
-
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
-
-## Server Requirements
-
-PHP version 8.1 or higher is required, with the following extensions installed:
-
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
-
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - If you are still using PHP 7.4 or 8.0, you should upgrade immediately.
-> - The end of life date for PHP 8.1 will be December 31, 2025.
-
-Additionally, make sure that the following extensions are enabled in your PHP:
-
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+For tracking issues and feature requests, please visit the [CodeIgniter Forum](http://forum.codeigniter.com).
