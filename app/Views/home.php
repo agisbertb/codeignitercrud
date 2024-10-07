@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,6 +17,7 @@
         }
     </style>
 </head>
+
 <body class="d-flex flex-column min-vh-100 bg-dark text-light">
 
     <!-- Navbar -->
@@ -33,6 +35,16 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     <h2 class="mb-4 text-dark">Users</h2>
+
+                    <!-- Alert -->
+
+                    <?php if (session()->getFlashdata('success')): ?>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert" style="font-weight: bold;">
+                            <?= session()->getFlashdata('success') ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <?php endif; ?>
+
                     <a href="/create" class="btn btn-success mb-3 float-end">Create new User</a>
                 </div>
             </div>
@@ -79,10 +91,11 @@
     <!-- Footer -->
     <footer class="bg-dark text-light py-3 text-center mt-auto">
         <div class="container">
-            <p class="mb-0">&copy; 2024 CodeIgniter CRUD. Made with ❤️ by <a href="https://github.com/agisbertb" class="text-light"  target="_blank">agisbertb</a></p>
+            <p class="mb-0">&copy; 2024 CodeIgniter CRUD. Made with ❤️ by <a href="https://github.com/agisbertb" class="text-light" target="_blank">agisbertb</a></p>
         </div>
     </footer>
 
     <script src="<?= base_url('assets/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
 </body>
+
 </html>
