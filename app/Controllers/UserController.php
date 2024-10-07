@@ -29,7 +29,7 @@ class UserController extends BaseController
             'surname' => 'required|min_length[3]|max_length[255]',
             'age' => 'required|integer|greater_than[0]|less_than[100]',
             'email' => 'required|valid_email|is_unique[users.email]',
-            'phone' => 'required|min_length[9]|max_length[15]'
+            'phone' => 'required|min_length[9]|max_length[20]'
         ]);
 
         if (!$validation->withRequest($this->request)->run()) {
@@ -64,7 +64,7 @@ class UserController extends BaseController
             'surname' => 'required|min_length[3]|max_length[255]',
             'age' => 'required|integer|greater_than[0]|less_than[100]',
             'email' => 'required|valid_email|is_unique[users.email,id,' . $id . ']',
-            'phone' => 'required|min_length[9]|max_length[15]'
+            'phone' => 'required|min_length[9]|max_length[20]'
         ]);
 
         if (!$validation->withRequest($this->request)->run()) {

@@ -9,4 +9,5 @@ class UserModel extends Model
     protected $table = 'users';
     protected $primaryKey = 'id';
     protected $allowedFields = ['name', 'surname', 'age', 'email', 'phone'];
+    protected $useTimestamps = true;
 }
