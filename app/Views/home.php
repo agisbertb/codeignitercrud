@@ -10,6 +10,11 @@
     <meta name="robots" content="index, follow">
     <title>CodeIgniter CRUD</title>
     <link rel="stylesheet" href="<?= base_url('assets/bootstrap/css/bootstrap.min.css') ?>">
+    <style>
+        .btn {
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body class="d-flex flex-column min-vh-100 bg-dark text-light">
 
