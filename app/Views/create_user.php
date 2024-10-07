@@ -44,6 +44,18 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     <h2 class="mb-4 text-dark">Create User</h2>
+
+                    <!-- Alert -->
+
+                    <?php if (session()->getFlashdata('errors')): ?>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-weight: bold;">
+                            <?php foreach (session()->getFlashdata('errors') as $error): ?>
+                                <p style="margin: 0;"><?= esc($error) ?></p>
+                            <?php endforeach; ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <?php endif; ?>
+
                 </div>
             </div>
 
@@ -52,26 +64,26 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="name" class="form-label text-dark">Name</label>
-                        <input type="text" name="name" id="name" class="form-control" required>
+                        <input type="text" name="name" id="name" value="<?= old('name') ?>" class="form-control" required>
                     </div>
                     <div class="col-md-6">
                         <label for="surname" class="form-label text-dark">Surname</label>
-                        <input type="text" name="surname" id="surname" class="form-control" required>
+                        <input type="text" name="surname" id="surname" value="<?= old('surname') ?>" class="form-control" required>
                     </div>
                 </div>
 
                 <div class="row mb-3">
                     <div class="col-md-4">
                         <label for="age" class="form-label text-dark">Age</label>
-                        <input type="number" name="age" id="age" class="form-control" required>
+                        <input type="number" name="age" id="age" value="<?= old('age') ?>" class="form-control" required>
                     </div>
                     <div class="col-md-4">
                         <label for="email" class="form-label text-dark">Email</label>
-                        <input type="email" name="email" id="email" class="form-control" required>
+                        <input type="email" name="email" id="email" value="<?= old('email') ?>" class="form-control" required>
                     </div>
                     <div class="col-md-4">
                         <label for="phone" class="form-label text-dark">Phone</label>
-                        <input type="text" name="phone" id="phone" class="form-control" required>
+                        <input type="text" name="phone" id="phone" value="<?= old('phone') ?>" class="form-control" required>
                     </div>
                 </div>
 

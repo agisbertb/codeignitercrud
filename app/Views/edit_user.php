@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,19 +15,23 @@
         .btn {
             font-weight: bold;
         }
+
         input:focus {
             border-color: #ff6700 !important;
             box-shadow: 0 0 5px rgba(255, 103, 0, 0.8);
             outline: none;
         }
+
         label.form-label {
             font-weight: bold;
         }
+
         .form-actions {
             text-align: right;
         }
     </style>
 </head>
+
 <body class="d-flex flex-column min-vh-100 bg-dark text-light">
 
     <!-- Navbar -->
@@ -44,6 +49,18 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     <h2 class="mb-4 text-dark">Edit User</h2>
+
+                    <!-- Alert -->
+
+                    <?php if (session()->getFlashdata('errors')): ?>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-weight: bold;">
+                            <?php foreach (session()->getFlashdata('errors') as $error): ?>
+                                <p style="margin: 0;"><?= esc($error) ?></p>
+                            <?php endforeach; ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <?php endif; ?>
+
                 </div>
             </div>
 
@@ -93,4 +110,5 @@
 
     <script src="<?= base_url('assets/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
 </body>
+
 </html>
