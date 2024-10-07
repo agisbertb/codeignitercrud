@@ -81,12 +81,13 @@ class UserController extends BaseController
     public function delete($id)
     {
         $model = new UserModel();
-        $model->delete($id);
 
-        if (empty($user)) {
-            return redirect()->to('/')->with('error', 'User not found');
+        if ($model->find($id)) {
+            $model->delete($id);
+            return redirect()->to('/')->with('success', 'User deleted successfully');
         }
 
-        return redirect()->to('/')->with('success', 'User deleted successfully');  
-    }
+        return redirect()->to('/')->with('error', 'User not found');  
+    }    
+
 }

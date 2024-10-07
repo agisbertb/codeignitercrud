@@ -76,12 +76,35 @@
                                         <td><?= $user['phone'] ?></td>
                                         <td>
                                             <a href="/edit/<?= $user['id'] ?>" class="btn btn-warning btn-sm">Edit</a>
-                                            <a href="/delete/<?= $user['id'] ?>" class="btn btn-danger btn-sm">Delete</a>
+                                            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-id="<?= $user['id'] ?>">Delete</button>
                                         </td>
+
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
                         </table>
+
+                        <!-- Modal for Deleting User -->
+                        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-dark" id="deleteModalLabel">Confirm Delete</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body text-dark">
+                                        Are you sure you want to delete this user?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        <form id="deleteForm" action="" method="post">
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -94,6 +117,17 @@
             <p class="mb-0">&copy; 2024 CodeIgniter CRUD. Made with ❤️ by <a href="https://github.com/agisbertb" class="text-light" target="_blank">agisbertb</a></p>
         </div>
     </footer>
+
+    <script>
+        const deleteModal = document.getElementById('deleteModal');
+        deleteModal.addEventListener('show.bs.modal', function(event) {
+            const button = event.relatedTarget;
+            const userId = button.getAttribute('data-bs-id');
+            const form = document.getElementById('deleteForm');
+
+            form.action = '/delete/' + userId;
+        });
+    </script>
 
     <script src="<?= base_url('assets/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
 </body>
