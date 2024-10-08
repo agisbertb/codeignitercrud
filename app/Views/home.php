@@ -74,11 +74,12 @@
                                         <td><?= $user['age'] ?></td>
                                         <td><?= $user['email'] ?></td>
                                         <td><?= $user['phone'] ?></td>
-                                        <td>
-                                            <a href="/edit/<?= $user['id'] ?>" class="btn btn-warning btn-sm">Edit</a>
-                                            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-id="<?= $user['id'] ?>">Delete</button>
+                                        <td class="text-center">
+                                            <div class="d-flex flex-column">
+                                                <a href="/edit/<?= $user['id'] ?>" class="btn btn-warning btn-sm mb-1">Edit</a>
+                                                <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-id="<?= $user['id'] ?>">Delete</button>
+                                            </div>
                                         </td>
-
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
