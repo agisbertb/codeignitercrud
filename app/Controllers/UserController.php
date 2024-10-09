@@ -12,12 +12,17 @@ class UserController extends BaseController
         $model = new UserModel();
         $data['users'] = $model->findAll();
         
-        return view('home', $data);
+        return view('home', [
+            'title' => 'CodeIgniter CRUD',
+            'users' => $data['users']
+        ]);
     }
 
     public function create()
     {
-        return view('create_user');
+        return view('create_user', [
+            'title' => 'Create User - CodeIgniter CRUD'
+        ]);
     }
 
     public function store()
@@ -52,7 +57,10 @@ class UserController extends BaseController
             return redirect()->to('/')->with('error', 'User not found');
         }
 
-        return view('edit_user', $data);
+        return view('edit_user', [
+            'title' => 'Edit User - CodeIgniter CRUD',
+            'user' => $data['user']
+        ]);
     }
 
     public function update($id)
